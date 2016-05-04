@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>梦幻空间网络日记</title>
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
+    <!-- <link rel="stylesheet" href="css/reset.css">  -->
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/spin.min.js" ></script>
+    <script>
+        $(document).ready(function(){
+            // 二级菜单
+            (function secMenu(){
+                // 理财二级
+                $('#assis').mouseenter(function(){
+                    $('#assis').after('<span class="nav-tip"><ul><li class="nav-sec"><a href="pay.html">添加收入</a></li><li class="nav-sec"><a href="">添加支出</a></li><li class="nav-sec"><a href="manage.pay.html">收入查询</a></li><li class="nav-sec"><a href="manage.income.html">支出查询</a></li></ul></span>');
+                    $('#assis').find('div').addClass('nav-bg-s');
+                });
+                $('#home,#clock,#manage,#quit').mouseenter(function(){
+                    $('.nav-tip').remove();
+                    $('#assis').find('div').removeClass('nav-bg-s');
+                });
+                // 日记二级
+                $('#diary').mouseenter(function(){
+                    $('.nav-tip').remove();
+                    $('#assis').find('div').removeClass('nav-bg-s');
+                    $('#diary').after('<span class="nav-tip-d"><ul><li class="nav-sec diary"><a href="#">发布日记</a></li><li class="nav-sec"><a href="index.manage.message.php">删除日记</a></li></ul></span>');
+                    $('#diary').find('div').addClass('nav-bg-s');
+                    $(".diary").click(function () {
+                        $('#bg').show()
+                        $('#bg').animate({opacity:'0.8'},'slow',function(){
+                            var $box = $('.box');
+                            $box.css({
+                                // //设置弹出层距离左边的位置
+                                // left: ($("body").width() - $box.width()) / 2 - 20 + "px",
+                                // //设置弹出层距离上面的位置
+                                // top: ($(window).height() - $box.height()) / 2 + $(window).scrollTop() + "px",
+                                display: "block"
+                            });
+                        });
+                        $("#bg").css({height: $(document).height()});
+                    });
+                });
+                $('#manage,#clock').mouseenter(function(){
+                    $('.nav-tip-d').remove();
+                    $('#diary').find('div').removeClass('nav-bg-s');
+                });
+                $('#wrapper').mouseenter(function(){
+                    $('.nav-tip').remove();
+                    $('#assis').find('div').removeClass('nav-bg-s');
+                    $('.nav-tip-d').remove();
+                    $('#diary').find('div').removeClass('nav-bg-s');
+                });
+            })();
+            // 时间选择器
+            (function timePicker(){
+                var birthYear = document.getElementById('birthYear');
+                var month = document.getElementById('month');
+                var days = document.getElementById('days');
+                var months = 12;
+                var monthsNode = [];
+                var bigMonth = 31;
+                var smallMonth =30;
+                var month2 = 28;
+                var month2Sp = 29;
+                var daysNode = [];
+                var option = document.getElementsByTagName('option');
+                selChangeMonth.status = 0;
+                selChangeYear.status = 0;
+                function clearChild(obj){
+                    for(var i = obj.children.length-1;i>0;i--){
+                        var removeChild = obj.children[i];
+                        obj.removeChild(removeChild);
+                    }
+                }
+                birthYear.addEventListener('change', selChangeYear, false);
+                function selChangeYear(){
+                    var b = month.selectedIndex;
+                    clearChild(month);
+                    if(birthYear.selectedIndex!=0){
+                        for(var i=0;i < months;i++){
+                            monthsNode[i] = document.createElement('option');
+                            monthsNode[i].innerHTML = i+1;
+                            month.appendChild(monthsNode[i]);
+                        }
+                    }
+                    else{
+                        clearChild(days);
+                        clearChild(month);
+                    }
+                    month.options[b].selected = true;
+                    if(b==2){
+                        selChangeMonth();
+                    }
+                }
+                month.addEventListener('change',selChangeMonth,false);
+                function selChangeMonth(){
+                    var b = days.selectedIndex;
+                    clearChild(days);
+                    if(month.selectedIndex!=0){
+                        if(month.selectedIndex == 1||month.selectedIndex ==3||month.selectedIndex ==5||month.selectedIndex ==7||month.selectedIndex ==8||month.selectedIndex ==10||month.selectedIndex ==12){
+                            for(var i = 0;i<bigMonth;i++){
+                                daysNode[i] = document.createElement('option');
+                                daysNode[i].innerHTML = i+1;
+                                days.appendChild(daysNode[i]);
+                            }
+                        }
+                        else if(month.selectedIndex == 4||month.selectedIndex ==6||month.selectedIndex ==9||month.selectedIndex ==11){
+                            for(var k =0;k<smallMonth;k++){
+                                daysNode[k] = document.createElement('option');
+                                daysNode[k].innerHTML = k+1;
+                                days.appendChild(daysNode[k]);
+                            }
+                        }
+                        else {
+                            if((birthYear.options[birthYear.selectedIndex].value % 4 == 0)&&(birthYear.options[birthYear.selectedIndex].value %100 !=0)||(birthYear.options[birthYear.selectedIndex].value %400 ==0)){
+                                for(var o = 0;o<month2Sp;o++){
+                                    daysNode[o] = document.createElement('option');
+                                    daysNode[o].innerHTML = o+1;
+                                    days.appendChild(daysNode[o]);
+                                }
+                            }
+                            else{
+
+                                for(var p = 0;p<month2;p++){
+                                    daysNode[p] = document.createElement('option');
+                                    daysNode[p].innerHTML = p+1;
+                                    days.appendChild(daysNode[p]);
+                                }
+                            }
+                        }
+                    }else{
+                        clearChild(days);
+                    }
+                    days.options[b].selected = true;
+                }
+            })();
+            //点击关闭按钮的时候，遮罩层关闭
+            $(".close").click(function () {
+                $("#bg,.box").css("display", "none");
+                $('#bg').css('opacity','0');
+            });
+            $('#quit').click(function(){
+                alert('1');
+            });
+            // 清空area
+            $('#saytext').click(function(){
+                if($('#saytext').val() == '现在在想什么？'){
+                    $('#saytext').val('');
+                }
+            })
+        });
+    </script>
+    <!--ajax-->
+    <script>
+        $(document).ready(function () {
+            var opts = {
+                lines: 13, // 花瓣数目
+                length: 10, // 花瓣长度
+                width: 5, // 花瓣宽度
+                radius: 15, // 花瓣距中心半径
+                corners: 1, // 花瓣圆滑度 (0-1)
+                rotate: 0, // 花瓣旋转角度
+                direction: 1, // 花瓣旋转方向 1: 顺时针, -1: 逆时针
+                color: 'rgba(0,170,170,1)', // 花瓣颜色
+                speed: 1, // 花瓣旋转速度
+                trail: 60, // 花瓣旋转时的拖影(百分比)
+                shadow: false, // 花瓣是否显示阴影
+                hwaccel: false, //spinner 是否启用硬件加速及高速旋转
+                className: 'spinner', // spinner css 样式名称
+                zIndex: 2e9, // spinner的z轴 (默认是2000000000)
+                top: 'auto', // spinner 相对父容器Top定位 单位 px
+                left: 'auto'// spinner 相对父容器Left定位 单位 px
+            };
+            var spinner = new Spinner(opts);
+            $('#incomeSubmit').click(function(){
+                event.preventDefault();
+
+                $.ajax({
+                    type:"POST",
+                    url:"manage.php",
+                    data: {
+                        sort: $("#sort").val(),
+                        birthYear: $("#birthYear").val(),
+                        month: $("#month").val(),
+                        days: $("#days").val(),
+                        amount: $("#amount").val(),
+                        comment: $("#comment").val()
+                    },
+                    beforeSend:function(){
+                        $("#firstDiv").text("");
+                        var target = $("#firstDiv").get(0);
+                        spinner.spin(target);
+                    },
+//                    dataType: "json",
+                    success: function (data) {
+                        $('#message-ok').show();
+                        spinner.spin();
+                    }
+                });
+            });
+        });
+    </script>
+    <!--弹窗2-->
+    <script>
+        $(document).ready(function(){
+            $('#message-s').click(function(){
+                $('#message-ok').hide();
+            })
+        });
+    </script>
+</head>
+<body>
+<nav class="l">
+    <div ><img id="logo"src="image/logo.png" alt=""></div>
+    <ul>
+        <li class="nav-first" id="home"><a href="index.php"><img src="image/home.png" class="icon" alt="">主页</a><div class="nav-bg"></div></li>
+        <li class="nav-first nav-first-s" id="assis"><a href="#"><img src="image/assis.png" class="icon" alt="">理财助手</a><div class="nav-bg"></div></li>
+        <li class="nav-first" id="clock"><a href="clock.html"><img src="image/clock.png" class="icon" alt="">网页闹钟</a><div class="nav-bg"></div></li>
+        <li class="nav-first" id="diary"><a href="#"><img src="image/diary.png" class="icon" alt="">我的日记</a><div class="nav-bg"></div></li>
+        <li class="nav-first" id="manage"><a href="change.pwd.html"><img src="image/manage.png" class="icon" alt="">管理日记</a><div class="nav-bg"></div></li>
+        <li class="nav-first" id="quit"><a href="login.html"><img src="image/quit.png" class="icon" alt="">退出</a><div class="nav-bg"></div></li>
+        <li id="copyRight"><p>Copyright©An</p> All Rights Reserved</li>
+    </ul>
+</nav>
+<div class="l section" id="wrapper">
+    <h1>Financial Assistant</h1>
+    <span class="underline"></span>
+    <h3>支出</h3>
+    <form id="sec-income" method="post" action="manage.php">
+        <ul>
+            <li class="sec-tip"><span>类别</span>
+                <select name="sort" id="sort" class="">
+                    <option value="none">-</option>
+                    <option value="food">餐饮</option>
+                    <option value="traffic">交通</option>
+                    <option value="travel">旅游</option>
+                    <option value="life">生活</option>
+                    <option value="furniture">家具</option>
+                    <option value="electric">电器</option>
+                </select>
+            </li>
+            <li class="sec-tip"><span>时间</span>
+                <select name="birthYear" id="birthYear">
+                    <option value="0">-</option>
+                    <option value="2017">2017</option>
+                    <option value="2016">2016</option>
+                    <option value="2015">2015</option>
+                    <option value="2014">2014</option>
+                </select>
+                <select name="month" id="month">
+                    <option value="0">-</option>
+                </select>
+                <select name="days" id="days">
+                    <option value="0">-</option>
+                </select>
+            </li>
+            <li class="sec-tip"><span>金额</span><input type="text" name="amount" id="amount" class="sec-input">
+            </li>
+            <span class="underline-s"></span>
+
+            <li class="sec-tip sec-tip-s"><ul>
+                <li class="l"><span>备注</span></li>
+                <li class="l"><textarea name="comment" id="comment"></textarea></li>
+            </ul>
+            </li>
+            <li class="c"></li>
+        </ul>
+        <input class="submit" id="incomeSubmit" type="submit" value="保存" style="margin-top:20px">
+    </form>
+    <div id="seccess"></div>
+</div>
+<!-- 弹窗 -->
+<div id="bg"></div>
+<div id="box-over">
+    <div class="box" style="display:none">
+        <h2 class="color">发布日记<a href="#" class="close"><img src="image/ic.png" alt=""></a></h2>
+        <div class="list">
+            <form action="manage.message.php" method="post">
+                <textarea class="input" id="saytext" name="sayText">现在在想什么？</textarea>
+                <p><span class="emotion "><img class="smail" src="image/smail.png" alt="">表情</span></p>
+                <a href=""><button id="submit"class="color" type="submit">提交</button></a>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!--提示窗-->
+<div id="message-ok">
+    <h3 id="message-p">保存成功！</h3>
+    <input id="message-s" class="submit" type="submit" value="确定" style="margin-top:20px">
+</div>
+<div id="firstDiv"></div>
+</body>
+<script type="text/javascript" src="js/jquery.qqFace.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.emotion').qqFace({
+            id : 'facebox',
+            assign:'saytext',
+            path:'arclist/' //表情存放的路径
+        });
+        $(".sub_btn").click(function(){
+            var str = $("#saytext").val();
+            $("#show").html(replace_em(str));
+        });
+    });
+    //查看结果
+    function replace_em(str){
+        str = str.replace(/\</g,'&lt;');
+        str = str.replace(/\>/g,'&gt;');
+        str = str.replace(/\n/g,'<br/>');
+        str = str.replace(/\[em_([0-9]*)\]/g,'<img src="arclist/$1.gif" border="0" />');
+        return str;
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $('nav').height($(document).height());
+        $('#copyRight').css('margin-top',$(document).height()-$('#quit').offset().top - $('#logo').height());
+    })
+</script>
+</html>

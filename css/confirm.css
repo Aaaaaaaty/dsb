@@ -1,0 +1,169 @@
+/*http://qzonestyle.gtimg.cn/qzone_v6/sprite/reg.png?max_age=19830211&d=20130124150201*/
+*{
+    margin: 0;
+    padding: 0;
+    /*text-align: center;*/
+    background-color:rgb(245,245,245) ;
+}
+body{
+    font-size: 12px;
+    line-height: 1.34;
+    font-family: Geneva,"\5B8B\4F53",Tahoma;
+}
+#headImg{
+    display: block;
+    width: 301px;
+    height: 79px;
+    background-image: url(../image/3.png);
+    background-position-x: 0px;
+    background-position-y: 0px;
+    background-repeat: no-repeat;
+    /* margin-top: 30px; */
+    margin-left: 311px;
+    margin-bottom: 10px;
+}
+#head{
+    border-bottom:1px solid rgb(225,225,225) ;
+}
+#boxSelect{
+    margin-top: 65px;
+}
+.box{
+    width: 680px;
+    height: 56px;
+    position: relative;
+    top: 30px;
+    left: 453px;
+}
+.txt{
+    width: 292px;
+    height: 16px;
+    line-height: 16px;
+    outline:  0 none;
+    border: 1px solid #d8d8d8;
+    border-radius: 2px;
+    box-shadow: 0 0 1px 1px rgba(0,0,0,.07) inset;
+    /*margin-bottom: 10px;*/
+    padding-top: 7px;
+    padding-bottom: 7px;
+    padding-right: 5px;
+    padding-left: 5px;
+    position: relative;
+    top: -7px;
+}
+.l{
+    width: 100px;
+    text-align: right;
+    margin-right: 14px;
+    float: left;
+    /*margin-left: 300px;*/
+    font-size: 14px;
+    color: rgb(88,88,88);
+    height: 29px;
+    line-height: 16px;
+}
+.c{
+    float: left;
+    width: 305px;
+    height: 34px;
+}
+#submit{
+    background-image: url("http://qzonestyle.gtimg.cn/qzone_v6/sprite/reg_form.png?max_age=19830211&d=20130124150201");
+    background-position-x:0 ;
+    background-position-y:0 ;
+    display: inline-block;
+    width: 141px;
+    height: 42px;
+    border: 0 none;
+    font-weight: normal!important;
+    font-family: \5FAE\8F6F\96C5\9ED1;
+    font-size: 20px;
+    line-height: 42px;
+    text-align: center;
+    text-decoration: none;
+    color: #fff;
+    position: relative;
+    left: 114px;
+}
+.c-9{
+    position: relative;
+    left: 114px;
+}
+.c-9 a{
+    text-decoration: none;
+    color: rgb(132, 168, 200);
+}
+input{
+    background-color: white;
+}
+#birthYear{
+    width: 79px;
+}
+#month{
+    width: 52px;
+}
+#days{
+    width: 52px;
+}
+.tip{
+    /*display: none;*/
+    /*display: inline-block;*/
+    width: 170px;
+    position: absolute;
+    top: -18px;
+    left: 418px;
+}
+.icon{
+    display: none;
+    width: 9px;
+    height: 16px;
+    background: url('http://qzonestyle.gtimg.cn/qzone_v6/img/reg/bg_tips_pop_trig.png?max_age=19830211&d=20130124150201');
+    position: relative;
+    top: 19px;
+    left: 0;
+    z-index: 1;
+}
+.tipContent{
+    display: none;
+    background-color: rgb(254,254,254);
+    padding: 3px;
+    border: 1px solid rgb(224,224,224);
+    position: relative;
+    top: -6px;
+    left: 8px;
+}
+.white{
+    position: relative;
+    top: 18px;
+    left: -6px;
+    display: inline-block;
+    width: 1px;
+    height: 13px;
+    background-color: white;
+    /*z-index: 2;*/
+}
+#email{
+    position: relative;
+}
+#name{
+    position: relative;
+}
+#password{
+    position: relative;
+}
+#passwordConfirm{
+    position: relative;
+}
+.tip_val{
+    position:absolute ;
+    left: 422px;
+}
+.tip_pic{
+    position: absolute;
+    top: 2px;
+    left: 422px;
+    display: block;
+    width: 21px;
+    height: 18px;
+    background: url(../image/icon_tiny.png) no-repeat -18px -163px;
+}

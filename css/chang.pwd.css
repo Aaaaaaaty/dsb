@@ -1,0 +1,177 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+
+.inputOuter{
+    position: relative;
+    top: 20px;
+    left: 70px;
+    width: 272px;
+    height: 42px;
+    background: url(../image/icon_tiny.png) no-repeat -1px -1px;
+}
+.inputOuter:hover{
+    cursor: text;
+    position: relative;
+    top: 20px;
+    left: 70px;
+    width: 272px;
+    height: 42px;
+    background: url(../image/icon_tiny.png) no-repeat -1px -1px;
+}
+.input-tips:hover{
+    cursor: text;
+}
+/*添加js改变焦点样式*/
+.inputOuter-focus{
+    cursor: text;
+    position: relative;
+    top: 20px;
+    left: 70px;
+    width: 272px;
+    height: 42px;
+    background:  url(../image/icon_tiny.png) no-repeat -1px -45px;
+}
+.inputOuter-pwd{
+    position: relative;
+    top: 36px;
+    left: 70px;
+    width: 272px;
+    height: 42px;
+    background: url(../image/icon_tiny.png) no-repeat -1px -1px;
+}
+.inputOuter-pwd-focus{
+    position: relative;
+    top: 36px;
+    left: 70px;
+    width: 272px;
+    height: 42px;
+    background:  url(../image/icon_tiny.png) no-repeat -1px -45px;
+}
+.inputOuter-pwd-focus-s{
+    position: relative;
+    top: 51px;
+    left: 70px;
+    width: 272px;
+    height: 42px;
+    background:  url(../image/icon_tiny.png) no-repeat -1px -45px;
+}
+.inputOuter-pwd-s{
+    position: relative;
+    top: 51px;
+    left: 70px;
+    width: 272px;
+    height: 42px;
+    background: url(../image/icon_tiny.png) no-repeat -1px -1px;
+}
+
+#user{
+    position: relative;
+}
+
+#uin-tips{
+    position: absolute;
+    top: 34px;
+    left:78px;
+    z-index: 1;
+    font-size: 14px;
+    color: #aaa;
+    line-height: 16px;
+}
+#u{
+    position: relative;
+    width: 258px;
+    top: 9px;
+    left:7px;
+    border: 0;
+    height: 25px;
+    outline: none;
+}
+#u:hover{
+    cursor: text;
+    position: relative;
+    width: 258px;
+    top: 9px;
+    left:7px;
+    border: 0;
+    height: 25px;
+    outline: none;
+
+}
+#password{
+
+}
+.pwd-tips{
+    position: absolute;
+    top: 171px;
+    left:78px;
+    z-index: 1;
+    font-size: 14px;
+    color: #aaa;
+    line-height: 16px;
+}
+#p{
+    position: relative;
+    width: 258px;
+    top: 9px;
+    left:7px;
+    border: 0;
+    height: 25px;
+    outline: none;
+
+}
+#p_s{
+    position: relative;
+    width: 258px;
+    top: 9px;
+    left:7px;
+    border: 0;
+    height: 25px;
+    outline: none;
+
+}
+#submit-btn{
+    background-color: rgba(0,170,170,1);
+    font-size:18px;
+    color: #fff;
+    width: 115px;
+    height: 35px;
+    position: relative;
+    top: 70px;
+    left: 70px;
+    border: 0;
+    /*text-align: center;*/
+    padding-left: 4px;
+    padding-top: 2px;
+    letter-spacing: 5px;
+    cursor: pointer;
+}
+#border{
+    position: absolute;
+    top: 100px;
+    left: 498px;
+    width: 409px;
+    height: 255px;
+    border: 1px solid #d8d8d8;
+    box-shadow: 0 0 6px rgba(0, 170, 170, .5);
+}
+.tip_pic{
+    position: absolute;
+    top: 13px;
+    left: 281px;
+    display: block;
+    width: 21px;
+    height: 18px;
+    background: url(../image/icon_tiny.png) no-repeat -18px -163px;
+}
+#p{
+    position: relative;
+}
+#p_s{
+    position: relative;
+}
+.tip_val{
+    position:absolute ;
+    left: 422px;
+}

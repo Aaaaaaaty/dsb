@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/confirm.css"/>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+        window.onload = function() {
+            (function timePicker(){
+                var birthYear = document.getElementById('birthYear');
+                var month = document.getElementById('month');
+                var days = document.getElementById('days');
+                var months = 12;
+                var monthsNode = [];
+                var bigMonth = 31;
+                var smallMonth =30;
+                var month2 = 28;
+                var month2Sp = 29;
+                var daysNode = [];
+                var option = document.getElementsByTagName('option');
+                selChangeMonth.status = 0;
+                selChangeYear.status = 0;
+                function clearChild(obj){
+                    for(var i = obj.children.length-1;i>0;i--){
+                        var removeChild = obj.children[i];
+                        obj.removeChild(removeChild);
+                    }
+                }
+                birthYear.addEventListener('change', selChangeYear, false);
+                function selChangeYear(){
+                    var b = month.selectedIndex;
+                    clearChild(month);
+                    if(birthYear.selectedIndex!=0){
+                        for(var i=0;i < months;i++){
+                            monthsNode[i] = document.createElement('option');
+                            monthsNode[i].innerHTML = i+1;
+                            month.appendChild(monthsNode[i]);
+                        }
+                    }
+                    else{
+                        clearChild(days);
+                        clearChild(month);
+                    }
+                    month.options[b].selected = true;
+                    if(b==2){
+                        selChangeMonth();
+                    }
+                }
+                month.addEventListener('change',selChangeMonth,false);
+                function selChangeMonth(){
+                    var b = days.selectedIndex;
+                    clearChild(days);
+                    if(month.selectedIndex!=0){
+                        if(month.selectedIndex == 1||month.selectedIndex ==3||month.selectedIndex ==5||month.selectedIndex ==7||month.selectedIndex ==8||month.selectedIndex ==10||month.selectedIndex ==12){
+                            for(var i = 0;i<bigMonth;i++){
+                                daysNode[i] = document.createElement('option');
+                                daysNode[i].innerHTML = i+1;
+                                days.appendChild(daysNode[i]);
+                            }
+                        }
+                        else if(month.selectedIndex == 4||month.selectedIndex ==6||month.selectedIndex ==9||month.selectedIndex ==11){
+                            for(var k =0;k<smallMonth;k++){
+                                daysNode[k] = document.createElement('option');
+                                daysNode[k].innerHTML = k+1;
+                                days.appendChild(daysNode[k]);
+                            }
+                        }
+                        else {
+                            if((birthYear.options[birthYear.selectedIndex].value % 4 == 0)&&(birthYear.options[birthYear.selectedIndex].value %100 !=0)||(birthYear.options[birthYear.selectedIndex].value %400 ==0)){
+                                for(var o = 0;o<month2Sp;o++){
+                                    daysNode[o] = document.createElement('option');
+                                    daysNode[o].innerHTML = o+1;
+                                    days.appendChild(daysNode[o]);
+                                }
+                            }
+                            else{
+
+                                for(var p = 0;p<month2;p++){
+                                    daysNode[p] = document.createElement('option');
+                                    daysNode[p].innerHTML = p+1;
+                                    days.appendChild(daysNode[p]);
+                                }
+                            }
+                        }
+                    }else{
+                        clearChild(days);
+                    }
+                    days.options[b].selected = true;
+                }
+            })();
+            (function borderChange(){
+                var e = document.getElementsByClassName('txt');
+                for(var i = 0; i< e.length;i++){
+                    e[i].addEventListener('focus',function border(event){
+                        if(event.target.id){
+                            var a = document.getElementById(event.target.id);
+                            a.style.border = '1px solid rgb(103,178,224)';
+                            a.style.boxShadow = '0 0 1px 2px rgba(0,0,0,.07) inset';
+
+                        }
+                    },false);
+                    e[i].addEventListener('blur',function border(event){
+                        if(event.target.id){
+                            var b = document.getElementById(event.target.id);
+                            b.style.border = '1px solid #d8d8d8';
+                            b.style.boxShadow = '0 0 1px 1px rgba(0,0,0,.07) inset';
+                        }
+                    },false);
+                }
+            })();
+        }
+    </script>
+    <!--确认信息格式-->
+    <script>
+        $(document).ready(function () {
+             check1=0;
+             check2=0;
+             check3=0;
+             check4=0;
+             check5=0;
+            var email = $('#email');
+            email.blur(function(){
+                var email_val = email.val();
+                var email_match = /\w+((-w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+/;
+                var result = email_val.match(email_match);
+                if(result == null){
+                    email.after("<span class='tip_val'>邮箱格式错误，请重新输入！</span>");
+                    check1=0;
+                }else{
+                    email.after("<span class='tip_pic'></span>");
+                    check1=1;
+                }
+            });
+            email.focus(function(){
+                email.next().remove();
+            });
+            var name = $('#name');
+            name.blur(function(){
+                var name_val = name.val();
+                if(name_val.length<3){
+                    name.after("<span class='tip_val'>用户名不能少于3位</span>");
+                    check2=0;
+                    return 0;
+                }
+                if(name_val.length>16){
+                    name.after("<span class='tip_val'>用户名过长</span>");
+                    check2=0;
+                    return 0;
+                }
+                var name_match = /^[a-z0-9_-]{3,16}$/;
+                var result = name_val.match(name_match);
+                if(result == null){
+                    name.after("<span class='tip_val'>用户名为下划线、小写字母、数字组合！</span>")
+                    check2=0;
+                }else{
+                    name.after("<span class='tip_pic'></span>")
+                    check2=1;
+                }
+            });
+            name.focus(function(){
+                name.next().remove();
+            });
+            var password = $('#password');
+            password.blur(function(){
+                var password_val = password.val();
+                if(password_val.length<6){
+                    password.after("<span class='tip_val'>密码不能少于6位</span>");
+                    check3=0;
+                    $('#passwordConfirm').attr("disabled","true");
+                    return 0;
+                }
+                if(password_val.length>18){
+                    password.after("<span class='tip_val'>密码过长</span>");
+                    check3=0;
+                    $('#passwordConfirm').attr("disabled","true");
+                    return 0;
+                }
+                var password_match = /^[a-z0-9_-]{6,18}$/;
+                var result = password_val.match(password_match);
+                if(result == null){
+                    password.after("<span class='tip_val'>密码为下划线、字母、数字组合！</span>");
+                    check3=0;
+                    $('#passwordConfirm').attr("disabled","true");
+                }else{
+                    password.after("<span class='tip_pic'></span>");
+                    check3=1;
+                    $('#passwordConfirm').attr("disabled",false);
+                }
+            });
+            password.focus(function(){
+                password.next().remove();
+            });
+            var passwordConfirm = $('#passwordConfirm');
+            passwordConfirm.blur(function(){
+                var password_val = password.val();
+                var passwordConfirm_val = passwordConfirm.val();
+                if(password_val == passwordConfirm_val){
+                    check4=1;
+                    passwordConfirm.after("<span class='tip_pic'></span>");
+                }else{
+                    check4=0;
+                    passwordConfirm.after("<span class='tip_val'>两次密码不相同！</span>")
+                }
+            });
+            passwordConfirm.focus(function(){
+                passwordConfirm.next().remove();
+            });
+        });
+    </script>
+</head>
+<body>
+    <div id="all">
+        <div id="head">
+            <span id="headImg"></span>
+        </div>
+        <div id="section">
+            <div id="boxSelect">
+                <form action="confirm.php" method="post" name="confirmForm" onsubmit="javascript:return check(this);">
+                    <div class="box box-1">
+                        <div class="l">邮箱注册</div>
+                        <div class="c">
+                            <input type="text" name="email" id="email" class="txt" />
+                            </div>
+                        </div>
+
+                    <div class="box box-2">
+                        <div class="l">昵称</div>
+                        <div class="c">
+                            <input type="text" name="name" id="name" class="txt"/>
+                        </div>
+                    </div>
+                    <div class="box box-3">
+                        <div class="l">生日</div>
+                        <div class="c">
+                            <select name="birthYear" id="birthYear">
+                                <option value="0">-</option>
+                                <option value="2015">2015</option>
+                                <option value="2014">2014</option>
+                                <option value="2013">2013</option>
+                                <option value="2012">2012</option>
+                                <option value="2011">2011</option>
+                                <option value="2010">2010</option>
+                                <option value="2009">2009</option>
+                                <option value="2008">2008</option>
+                                <option value="2007">2007</option>
+                                <option value="2006">2006</option>
+                                <option value="2005">2005</option>
+                                <option value="2004">2004</option>
+                                <option value="2003">2003</option>
+                                <option value="2002">2002</option>
+                                <option value="2001">2001</option>
+                                <option value="2000">2000</option>
+                                <option value="1999">1999</option>
+                                <option value="1998">1998</option>
+                                <option value="1997">1997</option>
+                                <option value="1996">1996</option>
+                                <option value="1995">1995</option>
+                                <option value="1994">1994</option>
+                                <option value="1993">1993</option>
+                                <option value="1992">1992</option>
+                                <option value="1991">1991</option>
+                                <option value="1990">1990</option>
+                            </select>
+                            <select name="month" id="month">
+                                <option value="0">-</option>
+                            </select>
+                            <select name="days" id="days">
+                                <option value="0">-</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="box box-4">
+                        <div class="l">性别</div>
+                        <div class="c">
+                            <input type="radio" checked="checked" class="sex" name="sex-1" id="sex-1"/>
+                            <label for="sex-1">男</label>
+                            <input type="radio" class="sex" name="sex-1" id="sex-2"/>
+                            <label for="sex-2">女</label>
+                        </div>
+                    </div>
+                    <div class="box box-5">
+                        <div class="l">密码</div>
+                        <div class="c">
+                            <input type="password" id="password" name="password" class="txt"/>
+                        </div>
+                    </div>
+                    <div class="box box-6">
+                        <div class="l">确认密码</div>
+                        <div class="c">
+                            <input disabled="disabled" type="password" id="passwordConfirm" name="passwordConfirm" class="txt"/>
+                        </div>
+                    </div>
+                    <div class="box box-8">
+                        <div class="c">
+                            <button type="submit"  id="submit">立即注册</button>
+                        </div>
+                    </div>
+                    <div class="box box-9">
+                        <div class="c c-9">
+                            <input type="checkbox" checked="checked" id="accept"/>
+                            <label for="accept">我接受
+                                <a href="#">梦幻空间服务协议</a>
+                                <a href="#">空间账号规则</a>
+                            </label>
+                        </div>
+                    </div>
+                </form>
+                <script>
+                    function check(){
+                        var birthYear = $('#birthYear').val();
+                        var month = $('#month').val();
+                        var days = $('#days').val();
+                        var a = parseInt(birthYear);
+                        var b = parseInt(month);
+                        var c = parseInt(days);
+                        if(a && b && c && check1 && check2 && check3 && check4){
+                            return true;
+                        }
+                        alert('信息填写不完整！');
+                        return false;
+
+                    }
+                </script>
+            </div>
+        </div>
+        <div id="footer"></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>梦幻空间网络日记</title>
+	<link rel="stylesheet" href="css/style.css">
+    <style>
+    
+    </style>
+	<script src="js/jquery-2.1.1.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		// 二级菜单
+		(function secMenu(){
+			// 理财二级
+			$('#assis').mouseenter(function(){
+				$('#assis').after('<span class="nav-tip"><ul><li class="nav-sec"><a href="pay.html">添加收入</a></li><li class="nav-sec"><a href="income.html">添加支出</a></li><li class="nav-sec"><a href="manage.pay.html">收入查询</a></li><li class="nav-sec"><a href="manage.income.html">支出查询</a></li></ul></span>');
+				$('#assis').find('div').addClass('nav-bg-s');
+			});
+			$('#home,#clock').mouseenter(function(){
+				$('.nav-tip').remove();
+				$('#assis').find('div').removeClass('nav-bg-s');
+			});
+			// 日记二级
+			$('#diary').mouseenter(function(){
+                $('.nav-tip').remove();
+                $('#assis').find('div').removeClass('nav-bg-s');
+                $('#diary').after('<span class="nav-tip-d"><ul><li class="nav-sec diary"><a href="#">发布日记</a></li><li class="nav-sec"><a href="index.manage.message.php">删除日记</a></li></ul></span>');
+                $('#diary').find('div').addClass('nav-bg-s');
+                $(".diary").click(function () {
+                $('#bg').show()
+                $('#bg').animate({opacity:'0.8'},'slow',function(){
+                var $box = $('.box');
+                $box.css({
+                    display: "block"
+            });
+            });
+            $("#bg").css({height: $(document).height()});  
+            });
+            });
+            $(".close").click(function () {
+                $("#bg,.box").css("display", "none");
+                $('#bg').css('opacity','0');
+            });
+			$('#manage,#clock,#manage,#quit').mouseenter(function(){
+				$('.nav-tip-d').remove();
+				$('#diary').find('div').removeClass('nav-bg-s');
+			});
+			$('#wrapper').mouseenter(function(){
+				$('.nav-tip').remove();
+				$('#assis').find('div').removeClass('nav-bg-s');
+				$('.nav-tip-d').remove();
+				$('#diary').find('div').removeClass('nav-bg-s');
+			});
+		})();
+		// 时间选择器
+		(function timePicker(){
+                var birthYear = document.getElementById('birthYear');
+                var month = document.getElementById('month');
+                var days = document.getElementById('days');
+                var months = 12;
+                var monthsNode = [];
+                var bigMonth = 31;
+                var smallMonth =30;
+                var month2 = 28;
+                var month2Sp = 29;
+                var daysNode = [];
+                var option = document.getElementsByTagName('option');
+                selChangeMonth.status = 0;
+                selChangeYear.status = 0;
+                function clearChild(obj){
+                    for(var i = obj.children.length-1;i>0;i--){
+                        var removeChild = obj.children[i];
+                        obj.removeChild(removeChild);
+                    }
+                }
+                birthYear.addEventListener('change', selChangeYear, false);
+                function selChangeYear(){
+                    var b = month.selectedIndex;
+                    clearChild(month);
+                    if(birthYear.selectedIndex!=0){
+                        for(var i=0;i < months;i++){
+                            monthsNode[i] = document.createElement('option');
+                            monthsNode[i].innerHTML = i+1;
+                            month.appendChild(monthsNode[i]);
+                        }
+                    }
+                    else{
+                        clearChild(days);
+                        clearChild(month);
+                    }
+                    month.options[b].selected = true;
+                    if(b==2){
+                        selChangeMonth();
+                    }
+                }
+                month.addEventListener('change',selChangeMonth,false);
+                function selChangeMonth(){
+                    var b = days.selectedIndex;
+                    clearChild(days);
+                    if(month.selectedIndex!=0){
+                        if(month.selectedIndex == 1||month.selectedIndex ==3||month.selectedIndex ==5||month.selectedIndex ==7||month.selectedIndex ==8||month.selectedIndex ==10||month.selectedIndex ==12){
+                            for(var i = 0;i<bigMonth;i++){
+                                daysNode[i] = document.createElement('option');
+                                daysNode[i].innerHTML = i+1;
+                                days.appendChild(daysNode[i]);
+                            }
+                        }
+                        else if(month.selectedIndex == 4||month.selectedIndex ==6||month.selectedIndex ==9||month.selectedIndex ==11){
+                            for(var k =0;k<smallMonth;k++){
+                                daysNode[k] = document.createElement('option');
+                                daysNode[k].innerHTML = k+1;
+                                days.appendChild(daysNode[k]);
+                            }
+                        }
+                        else {
+                            if((birthYear.options[birthYear.selectedIndex].value % 4 == 0)&&(birthYear.options[birthYear.selectedIndex].value %100 !=0)||(birthYear.options[birthYear.selectedIndex].value %400 ==0)){
+                                for(var o = 0;o<month2Sp;o++){
+                                    daysNode[o] = document.createElement('option');
+                                    daysNode[o].innerHTML = o+1;
+                                    days.appendChild(daysNode[o]);
+                                }
+                            }
+                            else{
+
+                                for(var p = 0;p<month2;p++){
+                                    daysNode[p] = document.createElement('option');
+                                    daysNode[p].innerHTML = p+1;
+                                    days.appendChild(daysNode[p]);
+                                }
+                            }
+                        }
+                    }else{
+                        clearChild(days);
+                    }
+                    days.options[b].selected = true;
+                }
+        })();
+        for(var k=0;k<60;k++){
+            $('#min').append('<option value='+k+'>'+k+'</option>');
+            $('#second').append('<option value='+k+'>'+k+'</option>');
+        }
+        for(k=0;k<24;k++){
+            $('#hour').append('<option value='+k+'>'+k+'</option>');
+        }
+        // 清空area
+        $('#saytext').click(function(){
+            if($('#saytext').val() == '现在在想什么？'){
+                $('#saytext').val('');
+            }
+        })
+       
+	})
+	</script>
+    <!--设定试听-->
+    <script>
+        $(document).ready(function(){
+            var try_music = $('#try_music');
+            var audio = $('#audio');
+            try_music.toggle(function(){
+                $('source').remove();
+
+                audio.append("<source src='audio/"+$('#music').val()+".mp3'>");
+                console.log($('source').attr("src"));
+                event.preventDefault();
+                document.getElementById("audio").load();
+                document.getElementById("audio").play();
+                try_music.attr("value","停止");
+            },function(){
+                event.preventDefault();
+                document.getElementById("audio").pause();
+                try_music.attr("value","开始");
+            });
+        });
+    </script>
+</head>
+<body>
+	<nav class="l">
+		<div ><img id="logo"src="image/logo.png" alt=""></div>
+		<ul>
+			<li class="nav-first" id="home"><a href="index.php"><img src="image/home.png" class="icon" alt="">主页</a><div class="nav-bg"></div></li>
+            <li class="nav-first " id="assis"><a href="#"><img src="image/assis.png" class="icon" alt="">理财助手</a><div class="nav-bg"></div></li>
+            <li class="nav-first nav-first-s" id="clock"><a href="clock.html"><img src="image/clock.png" class="icon" alt="">网页闹钟</a><div class="nav-bg"></div></li>
+            <li class="nav-first" id="diary"><a href="#"><img src="image/diary.png" class="icon" alt="">我的日记</a><div class="nav-bg"></div></li>
+            <li class="nav-first" id="manage"><a href="change.pwd.html"><img src="image/manage.png" class="icon" alt="">管理日记</a><div class="nav-bg"></div></li>
+            <li class="nav-first" id="quit"><a href="login.html"><img src="image/quit.png" class="icon" alt="">退出</a><div class="nav-bg"></div></li>
+            <li id="copyRight"><p>Copyright©An</p> All Rights Reserved</li>
+        </ul>
+	</nav>
+	<div class="l section" id="wrapper">
+		<h1>Alarm Clock</h1>
+		<span class="underline"></span>
+		<h3>设定</h3>	
+		<form action="clock.php" method="post" id="sec-income">
+		<ul> 
+			<li class="sec-tip"><span>提醒日期</span>
+                    <select name="birthYear" id="birthYear">
+                        <option value="0">-</option>
+                        <option value="2017">2017</option>
+                        <option value="2016">2016</option>
+                        <option value="2015">2015</option>
+                        <option value="2014">2014</option>
+                    </select>
+                    年
+                    <select name="month" id="month">
+                        <option value="0">-</option>
+                    </select>
+                    月
+                    <select name="days" id="days">
+                        <option value="0">-</option>
+                    </select>
+                    日
+            </li>
+            <li class="sec-tip"><span>提示时间</span>
+                <select name="hour" id="hour">
+                    <option value="25">-</option>
+                </select>
+                时
+                <select name="min" id="min">
+                    <option value="61">-</option>
+                </select>
+                分
+                <select name="sec" id="second">
+                    <option value="61">-</option>
+                </select>
+                秒
+			</li>
+            <li class="sec-tip"><span>闹钟铃声</span>
+                <select name="music" id="music">
+                    <option value="0">-</option>
+                    <option value="loveyourself">Love yourself</option>
+                    <option value="worthit">Worth it</option>
+                    <option value="animals">Animals</option>
+                    <option value="shuxiang">书香年华</option>
+                    <option value="qiannv">倩女幽魂</option>
+                </select>
+            </li>            </li>
+            <li class="sec-tip"><span>主题背景</span>
+                 <select name="sort" id="background">
+                    <option value="0">-</option>
+                    <option value="2">梦幻</option>
+                    <option value="1">浪漫</option>
+                    <option value="4">温暖</option>
+                    <option value="3">凄凉</option>
+                </select>
+            </li>
+            <span class="underline-s"></span>
+
+			<li class="sec-tip sec-tip-s"><ul>
+				<li class="l"><span>备注</span></li>
+				<li class="l"><textarea name="comment" id="comment"></textarea></li>
+				</ul>
+			</li>
+			<li class="c"></li>
+		</ul>
+		<input class="submit" type="submit" value="开启" style="margin-top:20px">
+        <input class="submit" type="submit" id="try_music" value="试听" style="margin-top:20px">
+		</form>
+        <audio preload="auto" id="audio" >
+        </audio>
+        </audio>	</div>
+        <!-- 弹窗 -->
+    <div id="bg"></div>
+    <div id="box-over">
+        <div class="box" style="display:none">
+        <h2 class="color">发布日记<a href="#" class="close"><img src="image/ic.png" alt=""></a></h2>
+        <div class="list">
+            <form action="manage.message.php" method="post">
+                <textarea class="input" id="saytext" name="sayText">现在在想什么？</textarea>
+                <p><span class="emotion "><img class="smail" src="image/smail.png" alt="">表情</span></p>
+                <a href=""><button id="submit"class="color" type="submit">提交</button></a>
+            </form>
+    </div>
+    </div>
+    </div>
+</body>
+<script type="text/javascript" src="js/jquery.qqFace.js"></script>
+<script type="text/javascript">
+$(function(){
+    $('.emotion').qqFace({
+        id : 'facebox', 
+        assign:'saytext', 
+        path:'arclist/' //表情存放的路径
+    });
+    $(".sub_btn").click(function(){
+        var str = $("#saytext").val();
+        $("#show").html(replace_em(str));
+    });
+});
+//查看结果
+function replace_em(str){
+    str = str.replace(/\</g,'&lt;');
+    str = str.replace(/\>/g,'&gt;');
+    str = str.replace(/\n/g,'<br/>');
+    str = str.replace(/\[em_([0-9]*)\]/g,'<img src="arclist/$1.gif" border="0" />');
+    return str;
+}
+</script>
+<script>
+    $(document).ready(function () {
+        $('nav').height($(document).height());
+        $('#copyRight').css('margin-top',$(document).height()-$('#quit').offset().top - $('#logo').height());
+    })
+</script>
+</html>

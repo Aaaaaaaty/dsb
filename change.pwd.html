@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/chang.pwd.css"/>
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script>
+        window.onload = function(){
+            if(document.addEventListener){
+                var u = document.getElementById('u');
+                var p = document.getElementById('p');
+                var p_s = document.getElementById('p_s');
+                u.addEventListener('focus',function(){
+                    var uBorder = document.getElementById('uBorder');
+                    uBorder.className = 'inputOuter-focus';
+                },false);
+                u.addEventListener('blur',function(){
+                    var uBorder = document.getElementById('uBorder');
+                    uBorder.className = 'inputOuter';
+                },false);
+                p.addEventListener('focus',function(){
+                    var pBorder = document.getElementById('pBorder');
+                    pBorder.className = 'inputOuter-pwd-focus'
+                });
+                p.addEventListener('blur',function(){
+                    var pBorder = document.getElementById('pBorder');
+                    pBorder.className = 'inputOuter-pwd'
+                });
+                p_s.addEventListener('focus',function(){
+                    var pBorder = document.getElementById('pBorder-s');
+                    pBorder.className = 'inputOuter-pwd-focus-s'
+                });
+                p_s.addEventListener('blur',function(){
+                    var pBorder = document.getElementById('pBorder-s');
+                    pBorder.className = 'inputOuter-pwd-s'
+                });
+            }
+            var a = document.getElementsByTagName('div');
+            // alert(a.length);
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            var check3,check4;
+            $('#p').attr("disabled","disabled");
+            $('#p_s').attr("disabled","disabled");
+            $('#u').blur(function(){
+                $.ajax({
+                    type:"GET",
+                    url:"change.pwd.php",
+                    dataType:"json",
+                    success:function(data){
+                        if($('#u').val() != data.pwd){
+                            alert('原密码填写错误');
+
+                        }else{
+                        $('#u').after("<span class='tip_pic'></span>");
+                            $('#p').attr("disabled",false);
+                            $('#p_s').attr("disabled",false);
+                        }
+                    }
+                });
+            });
+            var password = $('#p');
+            password.blur(function(){
+                var password_val = password.val();
+                if(password_val.length<6){
+                    alert('密码不能少于6位');
+                    check3=0;
+                    $('#p_s').attr("disabled","true");
+                    return 0;
+                }
+                if(password_val.length>18){
+                    alert('密码过长');
+                    check3=0;
+                    $('#p_s').attr("disabled","true");
+                    return 0;
+                }
+                var password_match = /^[a-z0-9_-]{6,18}$/;
+                var result = password_val.match(password_match);
+                if(result == null){
+                    alert('密码为下划线、字母、数字组合！');
+                    check3=0;
+                    $('#p_s').attr("disabled","true");
+                }else{
+                    password.after("<span class='tip_pic'></span>");
+                    check3=1;
+                    $('#p_s').attr("disabled",false);
+                }
+            });
+            password.focus(function(){
+                password.next().remove();
+            });
+            var passwordConfirm = $('#p_s');
+            passwordConfirm.blur(function(){
+                var password_val = password.val();
+                var passwordConfirm_val = passwordConfirm.val();
+                if(password_val == passwordConfirm_val){
+                    check4=1;
+                    passwordConfirm.after("<span class='tip_pic'></span>");
+                }else{
+                    check4=0;
+                    alert('两次密码不相同');
+                }
+            });
+            passwordConfirm.focus(function(){
+                passwordConfirm.next().remove();
+            });
+
+            $('#submit-btn').click(function(){
+                if(check3 && check4){
+                    passwordConfirm.after("<span class='tip_pic'></span>");
+                }else{
+                    alert('密码信息不完整');
+                    event.preventDefault();
+                }
+            });
+
+        });
+
+    </script>
+</head>
+<body>
+<div id="border">
+    <form action="change.pwd.sent.php" method="post">
+        <div id="user">
+            <label class="input-tips" id="uin-tips" for="u" style="display:block"></label>
+            <div class="inputOuter" id="uBorder">
+                <input type="text" class="inputStyle" placeholder="旧密码" id="u" name="u">
+            </div>
+        </div>
+        <div >
+            <label class="input-tips" class="pwd-tips" for="p" style="display:block"></label>
+            <div class="inputOuter-pwd" id="pBorder">
+                <input type="password" class="inputStyle-pwd" placeholder="新密码" id="p" name="p"/>
+            </div>
+        </div>
+        <div>
+            <label class="input-tips" class="pwd-tips" for="p" style="display:block"></label>
+            <div class="inputOuter-pwd-s" id="pBorder-s">
+                <input type="password" class="inputStyle-pwd-s" placeholder="新密码确认" id="p_s" name="p_s"/>
+            </div>
+        </div>
+        <div class="submit">
+            <input type="submit" id="submit-btn" value="确认">
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

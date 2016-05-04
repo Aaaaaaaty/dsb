@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>梦幻空间网络日记</title>
+    <!-- <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
+    <!-- <link rel="stylesheet" href="css/reset.css">  -->
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/echarts.common.min.js"></script>
+    <script type="text/javascript" src="js/spin.min.js" ></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        $(document).ready(function(){
+            // 二级菜单
+            (function secMenu(){
+                // 理财二级
+                $('#assis').mouseenter(function(){
+                    $('#assis').after('<span class="nav-tip"><ul><li class="nav-sec"><a href="pay.html">添加收入</a></li><li class="nav-sec"><a href="income.html">添加支出</a></li><li class="nav-sec"><a href="manage.pay.html">收入查询</a></li><li class="nav-sec"><a href="manage.income.html">支出查询</a></li></ul></span>');
+                    $('#assis').find('div').addClass('nav-bg-s');
+                });
+                $('#home,#clock,#manage,#quit').mouseenter(function(){
+                    $('.nav-tip').remove();
+                    $('#assis').find('div').removeClass('nav-bg-s');
+                });
+                // 日记二级
+                $('#diary').mouseenter(function(){
+                    $('.nav-tip').remove();
+                    $('#assis').find('div').removeClass('nav-bg-s');
+                    $('#diary').after('<span class="nav-tip-d"><ul><li class="nav-sec diary"><a href="#">发布日记</a></li><li class="nav-sec"><a href="index.manage.message.php">删除日记</a></li></ul></span>');
+                    $('#diary').find('div').addClass('nav-bg-s');
+                    $(".diary").click(function () {
+                        $('#bg').show()
+                        $('#bg').animate({opacity:'0.8'},'slow',function(){
+                            var $box = $('.box');
+                            $box.css({
+                                // //设置弹出层距离左边的位置
+                                // left: ($("body").width() - $box.width()) / 2 - 20 + "px",
+                                // //设置弹出层距离上面的位置
+                                // top: ($(window).height() - $box.height()) / 2 + $(window).scrollTop() + "px",
+                                display: "block"
+                            });
+                        });
+                        $("#bg").css({height: $(document).height()});
+                    });
+                });
+                $('#manage,#clock').mouseenter(function(){
+                    $('.nav-tip-d').remove();
+                    $('#diary').find('div').removeClass('nav-bg-s');
+                });
+                $('#wrapper').mouseenter(function(){
+                    $('.nav-tip').remove();
+                    $('#assis').find('div').removeClass('nav-bg-s');
+                    $('.nav-tip-d').remove();
+                    $('#diary').find('div').removeClass('nav-bg-s');
+                });
+            })();
+            //点击关闭按钮的时候，遮罩层关闭
+            $(".close").click(function () {
+                $("#bg,.box").css("display", "none");
+                $('#bg').css('opacity','0');
+            });
+            // 清空area
+            $('#saytext').click(function(){
+                if($('#saytext').val() == '现在在想什么？'){
+                    $('#saytext').val('');
+                }
+            })
+        });
+    </script>
+    <script>
+        //        ajax交互
+        $(document).ready(function(){
+
+        });
+    </script>
+</head>
+<body>
+<nav class="l">
+    <div ><img id="logo"src="image/logo.png" alt=""></div>
+    <ul>
+        <li class="nav-first" id="home"><a href="index.php"><img src="image/home.png" class="icon" alt="">主页</a><div class="nav-bg"></div></li>
+        <li class="nav-first nav-first-s" id="assis"><a href="#"><img src="image/assis.png" class="icon" alt="">理财助手</a><div class="nav-bg"></div></li>
+        <li class="nav-first" id="clock"><a href="clock.html"><img src="image/clock.png" class="icon" alt="">网页闹钟</a><div class="nav-bg"></div></li>
+        <li class="nav-first" id="diary"><a href="#"><img src="image/diary.png" class="icon" alt="">我的日记</a><div class="nav-bg"></div></li>
+        <li class="nav-first" id="manage"><a href="change.pwd.html"><img src="image/manage.png" class="icon" alt="">管理日记</a><div class="nav-bg"></div></li>
+        <li class="nav-first" id="quit"><a href="login.html"><img src="image/quit.png" class="icon" alt="">退出</a><div class="nav-bg"></div></li>
+        <li id="copyRight"><p>Copyright©An</p> All Rights Reserved</li>
+    </ul>
+</nav>
+<div class="l section" id="wrapper">
+    <h1>Financial Assistant</h1>
+    <span class="underline"></span>
+    <h3>收入查询</h3>
+    <form action="fetch.pay.php" id="sec-income-s">
+        <ul>
+            <!--<li class="sec-tip"><span>类别</span><select name="sort" id="" class="">-->
+                <!--<option value="none">-</option>-->
+                <!--<option value="food">餐饮</option>-->
+                <!--<option value="traffic">交通</option>-->
+                <!--<option value="travel">旅游</option>-->
+                <!--<option value="life">生活</option>-->
+                <!--<option value="furniture">家具</option>-->
+                <!--<option value="electric">电器</option>-->
+            <!--</select>-->
+            <!--</li>-->
+            <li class="sec-tip"><span>时间</span><select name="birthYear" id="birthYear">
+                <option value="0">-</option>
+                <option value="2017">2017</option>
+                <option value="2016">2016</option>
+                <option value="2015">2015</option>
+                <option value="2014">2014</option>
+            </select>
+                <select name="month" id="month">
+                    <option value="0">-</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                </select>
+                <!--<select name="days" id="days">-->
+                <!--<option value="0">-</option>-->
+                <!--</select>-->
+            </li>
+            <li class="sec-tip sec-tip-s">
+            </li>
+            <li class="c"></li>
+        </ul>
+        <input class="submit" id="querySubmit" type="submit" value="查询">
+    </form>
+    <div id="main-s"><div id="main" style="width: 600px;height:400px;"></div></div>
+    <!--异步载入饼图数据-->
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+
+        // 指定图表的配置项和数据
+        option = {
+            backgroundColor: 'white',
+
+            title: {
+                text: '收入情况汇总',
+                left: 'center',
+                top: 20,
+                textStyle: {
+                    color: '#ccc'
+                }
+            },
+
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c} ({d}%)"
+            },
+
+            visualMap: {
+                show: false,
+                min: 80,
+                max: 600,
+                inRange: {
+                    colorLightness: [0, 1]
+                }
+            },
+            series : [
+                {
+                    name:'访问来源',
+                    type:'pie',
+                    radius : '60%',
+                    center: ['50%', '50%'],
+                    data:[].sort(function (a, b) { return a.value - b.value}),
+                    roseType: 'angle',
+                    label: {
+                        normal: {
+                            textStyle: {
+                                color: 'rgba(0, 0, 0, 1)'
+                            }
+                        }
+                    },
+                    labelLine: {
+                        normal: {
+                            lineStyle: {
+                                color: 'rgba(0, 0, 0, 1)'
+                            },
+                            smooth: 0.2,
+                            length: 10,
+                            length2: 20
+                        }
+                    },
+                    itemStyle: {
+                        normal: {
+                            color: 'rgba(0,170,170,1)'
+                        }
+                    }
+                }
+            ]
+        };
+        $('#querySubmit').click(function(){
+            event.preventDefault();
+            var opts = {
+                lines: 13, // 花瓣数目
+                length: 10, // 花瓣长度
+                width: 5, // 花瓣宽度
+                radius: 15, // 花瓣距中心半径
+                corners: 1, // 花瓣圆滑度 (0-1)
+                rotate: 0, // 花瓣旋转角度
+                direction: 1, // 花瓣旋转方向 1: 顺时针, -1: 逆时针
+                color: 'rgba(0,170,170,1)', // 花瓣颜色
+                speed: 1, // 花瓣旋转速度
+                trail: 60, // 花瓣旋转时的拖影(百分比)
+                shadow: false, // 花瓣是否显示阴影
+                hwaccel: false, //spinner 是否启用硬件加速及高速旋转
+                className: 'spinner', // spinner css 样式名称
+                zIndex: 2e9, // spinner的z轴 (默认是2000000000)
+                top: 'auto', // spinner 相对父容器Top定位 单位 px
+                left: 'auto'// spinner 相对父容器Left定位 单位 px
+            };
+            var spinner = new Spinner(opts);
+
+            $.ajax({
+                type:"GET",
+                url:"fetch.pay.php",
+                data: {
+//                        sort: $("#sort").val(),
+                    birthYear: $("#birthYear").val(),
+                    month: $("#month").val()
+                },
+                dataType: "json",
+                beforeSend:function(){
+                    $("#firstDiv").text("");
+                    var target = $("#firstDiv").get(0);
+                    spinner.spin(target);
+                },
+                success: function(data){
+                    spinner.spin();
+                    var obj = eval(data);
+                    var dataObj = [];
+                    var food=0;
+                    var traffic=0;
+                    var travel=0;
+                    var furniture=0;
+                    var electric=0;
+                    var life=0;
+                    for(var i in obj){
+                        if(obj[i].sort == 'food'){
+                            food = Number(obj[i].amount) + Number(food);
+                        }
+                        if(obj[i].sort == 'traffic'){
+                            traffic = Number(obj[i].amount) + Number(traffic);
+                        }
+                        if(obj[i].sort == 'travel'){
+                            travel = Number(obj[i].amount) + Number(travel);
+                        }
+                        if(obj[i].sort == 'furniture'){
+                            furniture = Number(obj[i].amount) + Number(furniture);
+                        }
+                        if(obj[i].sort == 'electric'){
+                            electric = Number(obj[i].amount) + Number(electric);
+                        }
+                        if(obj[i].sort == 'life'){
+                            life = Number(obj[i].amount) + Number(life);
+                        }
+                    }
+                    dataObj.push(
+                            {value:food,name:'餐饮',itemStyle: {
+                                normal: {
+                                    color: 'rgba(0,150,160,1)'
+                                }
+                            }},
+                            {value:traffic,name:'交通',itemStyle: {
+                                normal: {
+                                    color: 'rgba(0,145,150,1)'}
+                            }},
+                            {value:travel,name:'旅游',itemStyle: {
+                                normal: {
+                                    color: 'rgba(0,140,150,1)'}
+                            }},
+                            {value:electric,name:'电器',itemStyle: {
+                                normal: {
+                                    color: 'rgba(0,150,160,1)'}
+                            }},
+                            {value:life,name:'生活',itemStyle: {
+                                normal: {
+                                    color: 'rgba(0,150,150,1)'}
+                            }},
+                            {value:furniture,name:'家具',itemStyle: {
+                                normal: {
+                                    color: 'rgba(0,150,160,1)'}
+                            }}
+                    );
+                    myChart.setOption({
+                        series: [{
+                            // 根据名字对应到相应的系列
+                            name: '销量',
+                            data: dataObj
+                        }]
+                    });
+                }
+            });
+        });
+        myChart.setOption(option);
+    </script>
+
+</div>
+<!-- 弹窗 -->
+<div id="bg"></div>
+<div id="box-over">
+    <div class="box" style="display:none">
+        <h2 class="color">发布日记<a href="#" class="close"><img src="image/ic.png" alt=""></a></h2>
+        <div class="list">
+            <form action="manage.message.php" method="post">
+                <textarea class="input" id="saytext" name="sayText">现在在想什么？</textarea>
+                <p><span class="emotion "><img class="smail" src="image/smail.png" alt="">表情</span></p>
+                <a href=""><button id="submit"class="color" type="submit">提交</button></a>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="firstDiv"></div>
+</body>
+<!--qq表情-->
+<script type="text/javascript" src="js/jquery.qqFace.js"></script>
+<script type="text/javascript">
+    $(function(){
+        $('.emotion').qqFace({
+            id : 'facebox',
+            assign:'saytext',
+            path:'arclist/' //表情存放的路径
+        });
+        $(".sub_btn").click(function(){
+            var str = $("#saytext").val();
+            $("#show").html(replace_em(str));
+        });
+    });
+    //查看结果
+    function replace_em(str){
+        str = str.replace(/\</g,'&lt;');
+        str = str.replace(/\>/g,'&gt;');
+        str = str.replace(/\n/g,'<br/>');
+        str = str.replace(/\[em_([0-9]*)\]/g,'<img src="arclist/$1.gif" border="0" />');
+        return str;
+    }
+</script>
+<script>
+    $(document).ready(function () {
+        $('nav').height($(document).height());
+        $('#copyRight').css('margin-top',$(document).height()-$('#quit').offset().top - $('#logo').height());
+    })
+</script>
+</html>

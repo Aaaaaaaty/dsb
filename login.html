@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+    <title>梦幻空间日记登录</title>
+	<link href="css/login.css" type="text/css" rel="stylesheet">
+    <script src="js/jquery-2.1.1.min.js"></script>
+	<script>
+		window.onload = function(){
+			(function changeBg(){
+				var index = Math.round(Math.random()*6);
+				var url = "image/bg1.jpg";
+				var a = url.replace(/1/,index);
+				var backChange = document.getElementById('background');
+				backChange.style.backgroundImage = 'url('+a+')';
+			})();
+			if(document.addEventListener){
+				var u = document.getElementById('u');
+				var p = document.getElementById('p');
+				u.addEventListener('focus',function(){
+					var uBorder = document.getElementById('uBorder');
+					uBorder.className = 'inputOuter-focus';
+				},false);
+				u.addEventListener('blur',function(){
+					var uBorder = document.getElementById('uBorder');
+					uBorder.className = 'inputOuter';
+				},false);
+				p.addEventListener('focus',function(){
+					var pBorder = document.getElementById('pBorder');
+					pBorder.className = 'inputOuter-pwd-focus'
+				});
+				p.addEventListener('blur',function(){
+					var pBorder = document.getElementById('pBorder');
+					pBorder.className = 'inputOuter-pwd'
+				});
+			}
+			var a = document.getElementsByTagName('div');
+			// alert(a.length);
+		}
+	</script>
+    <!--ajax匹配用户名密码-->
+    <script>
+        $(document).ready(function(){
+            $('#submit-btn').click(function () {
+                event.preventDefault();
+                $.ajax({
+                    type:'POST',
+                    url:"login.php",
+                    data:{
+                        u:$('.inputStyle').val(),
+                        p:$('.inputStyle-pwd').val()
+                    },
+                    dataType:"json",
+                    success:function(data) {
+                        if(data.success == true){
+                            window.location.href = 'index.php';
+                        }
+                        else{
+                            alert(data.msg);
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+</head>
+<body>
+	<div id="all">
+		<div id="background">
+			<div id="logo"><img src="image/1.png" alt=""/></div>
+			<div id="login">
+				<div id="login-it">
+					<p>Welcome back!</p>
+				</div>
+                <form>
+				<div id="user">
+					<label class="input-tips" id="uin-tips" for="u" style="display:block"></label>
+					<div class="inputOuter" id="uBorder">
+						<input type="text" class="inputStyle" placeholder="支持QQ号/邮箱/手机号登录" id="u" name="u">
+						<!--<a class="uin-del"></a>>-->
+					</div>
+				</div>
+				<div id="password">
+					<label class="input-tips" id="pwd-tips" for="p" style="display:block"></label>
+					<div class="inputOuter-pwd" id="pBorder">
+						<input type="password" class="inputStyle-pwd" placeholder="密码" id="p" name="p"/>
+					</div>
+				</div>
+				<div class="submit">
+					<input type="submit" id="submit-btn" value="登录">
+				</div>
+                </form>
+				<div id="footer-login">
+					<ul>
+						<li class="question "><a>忘记密码?<span class="border"></span></a></li>
+						<li class="question "><a href="confirm.html">注册新账号<span class="border"></span></a></li>
+						<li class="question "><a>意见反馈</a></li>
+					</ul>
+				</div>
+			</div>
+			<div id="footer"></div>
+		</div>
+	</div>
+</body>
+
+</html>

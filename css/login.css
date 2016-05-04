@@ -1,0 +1,183 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+	font-family:Tahoma,Verdana,Arial,宋体;
+}
+#all{
+	height: 805px;
+}
+#background{
+	height: 805px;
+	background-size: cover;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	background-repeat: no-repeat;
+}
+#logo{
+    position: relative;
+    top: 100px;
+    left: 200px;
+}
+#login{
+	display: block;
+	background-color: rgb(255,255,255);
+	position: absolute;
+	top: 200px;
+	left: 800px;
+	width: 418px;
+	height: 316px;
+	border-radius:5px ;
+	border:1px solid rgb(226,226,226);
+}
+#login-it{
+	position: relative;
+	font-size: 20px;
+	/*top: 25px;*/
+	/*left: 70px;*/
+	padding-left: 70px;
+	padding-top: 32px;
+	height: 45px;
+	border-bottom: 1px solid rgb(226,226,226);
+	color: #333;
+}
+.inputOuter{
+	position: relative;
+	top: 20px;
+	left: 70px;
+	width: 272px;
+	height: 42px;
+	background: url(../image/icon_tiny.png) no-repeat -1px -1px;
+}
+.inputOuter:hover{
+	cursor: text;
+	position: relative;
+	top: 20px;
+	left: 70px;
+	width: 272px;
+	height: 42px;
+	background: url(../image/icon_tiny.png) no-repeat -1px -1px;
+}
+.input-tips:hover{
+	cursor: text;
+}
+/*添加js改变焦点样式*/
+.inputOuter-focus{
+	cursor: text;
+	position: relative;
+	top: 20px;
+	left: 70px;
+	width: 272px;
+	height: 42px;
+	background:  url(../image/icon_tiny.png) no-repeat -1px -45px;
+}
+.inputOuter-pwd{
+	position: relative;
+	top: 36px;
+	left: 70px;
+	width: 272px;
+	height: 42px;
+	background: url(../image/icon_tiny.png) no-repeat -1px -1px;
+}
+.inputOuter-pwd-focus{
+	position: relative;
+	top: 36px;
+	left: 70px;
+	width: 272px;
+	height: 42px;
+	background:  url(../image/icon_tiny.png) no-repeat -1px -45px;
+}
+
+#user{
+	position: relative;
+}
+
+#uin-tips{
+	position: absolute;
+	top: 34px;
+	left:78px;
+	z-index: 1;
+	font-size: 14px;
+	color: #aaa;
+	line-height: 16px;
+}
+#u{
+	position: relative;
+	width: 258px;
+	top: 9px;
+	left:7px;
+	border: 0;
+	height: 25px;
+	outline: none;
+}
+#u:hover{
+	cursor: text;
+	position: relative;
+	width: 258px;
+	top: 9px;
+	left:7px;
+	border: 0;
+	height: 25px;
+	outline: none;
+
+}
+#password{
+
+}
+#pwd-tips{
+	position: absolute;
+	top: 171px;
+	left:78px;
+	z-index: 1;
+	font-size: 14px;
+	color: #aaa;
+	line-height: 16px;
+}
+#p{
+	position: relative;
+	width: 258px;
+	top: 9px;
+	left:7px;
+	border: 0;
+	height: 25px;
+	outline: none;
+
+}
+#submit-btn{
+	background: url(../image/icon_tiny.png) no-repeat 0 -90px;
+	font-size:18px;
+	font-weight: bold;
+	color: #fff;
+	width: 115px;
+	height: 35px;
+	position: relative;
+	top: 53px;
+	left: 70px;
+	border: 0;
+	/*text-align: center;*/
+	padding-left: 4px;
+	padding-top: 2px;
+	letter-spacing: 5px;
+	cursor: pointer;
+}
+.question{
+	float: left;
+	list-style: none;
+	color: #666;
+	font-size: 14px;
+	position: relative;
+	top: 76px;
+	left: 166px;
+	/*border-right: 1px solid #aaa;*/
+	height: 14px;
+}
+.border{
+	display: inline-block;
+	border-right: 1px solid #aaa;
+	height: 14px;
+	position: relative;
+	top: 2px;
+	padding-left: 10px;
+	margin-right: 10px;
+}
