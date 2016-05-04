@@ -29,6 +29,7 @@
     <script src="js/jquery.js"></script>
     <script>
         $(document).ready(function () {
+
             var date = null;
             $.ajax({
                 type: "GET",
@@ -83,8 +84,11 @@
                 $('#t_h').text(int_hour);
                 $('#t_m').text(int_minute);
                 $('#t_s').text(int_second);
+                $('#audio').find('source').remove();
+                $('#audio').append('<source src="audio/'+date.music_ajax+'.mp3">');
                 if (int_day == 0 && int_hour == 0 && int_minute == 0 && int_second == 0) {
                     clearInterval(t);
+
                     $('.audioplayer-playpause').click();
                 }
                 $('body').css('background','url(image/'+date.sort_ajax+'.jpg)no-repeat');
@@ -102,8 +106,11 @@
 
 <div id="wrapper">
     <audio preload="auto" controls id="audio">
-        <source src="audio/shuxiang.mp3">
+        <source src="audio/qiannv.mp3">;
     </audio>
+    <!--<script>$(document).ready(function(){-->
+        <!--$('#audio').append('<source src="audio/'+date.music_ajax+'.mp3">');-->
+    <!--})</script>-->
     <script src="js/audioplayer.js"></script>
     <script>$(function () {
         $('audio').audioPlayer();

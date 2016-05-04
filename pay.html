@@ -14,7 +14,7 @@
             (function secMenu(){
                 // 理财二级
                 $('#assis').mouseenter(function(){
-                    $('#assis').after('<span class="nav-tip"><ul><li class="nav-sec"><a href="pay.html">添加收入</a></li><li class="nav-sec"><a href="">添加支出</a></li><li class="nav-sec"><a href="manage.pay.html">收入查询</a></li><li class="nav-sec"><a href="manage.income.html">支出查询</a></li></ul></span>');
+                    $('#assis').after('<span class="nav-tip"><ul><li class="nav-sec"><a href="pay.html">添加收入</a></li><li class="nav-sec"><a href="income.html">添加支出</a></li><li class="nav-sec"><a href="manage.pay.html">收入查询</a></li><li class="nav-sec"><a href="manage.income.html">支出查询</a></li></ul></span>');
                     $('#assis').find('div').addClass('nav-bg-s');
                 });
                 $('#home,#clock,#manage,#quit').mouseenter(function(){
@@ -179,7 +179,7 @@
 
                 $.ajax({
                     type:"POST",
-                    url:"manage.php",
+                    url:"manage2.php",
                     data: {
                         sort: $("#sort").val(),
                         birthYear: $("#birthYear").val(),
@@ -227,18 +227,17 @@
 <div class="l section" id="wrapper">
     <h1>Financial Assistant</h1>
     <span class="underline"></span>
-    <h3>支出</h3>
-    <form id="sec-income" method="post" action="manage.php">
+    <h3>收入</h3>
+    <form id="sec-income" method="post" action="manage2.php">
         <ul>
             <li class="sec-tip"><span>类别</span>
                 <select name="sort" id="sort" class="">
                     <option value="none">-</option>
-                    <option value="food">餐饮</option>
-                    <option value="traffic">交通</option>
-                    <option value="travel">旅游</option>
-                    <option value="life">生活</option>
-                    <option value="furniture">家具</option>
-                    <option value="electric">电器</option>
+                    <option value="food">工资</option>
+                    <option value="traffic">奖金</option>
+                    <option value="travel">分红</option>
+                    <option value="life">股票</option>
+                    <option value="furniture">期权</option>
                 </select>
             </li>
             <li class="sec-tip"><span>时间</span>

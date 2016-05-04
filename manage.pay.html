@@ -224,7 +224,7 @@
 
             $.ajax({
                 type:"GET",
-                url:"fetch.pay.php",
+                url:"fetch.income.php",
                 data: {
 //                        sort: $("#sort").val(),
                     birthYear: $("#birthYear").val(),
@@ -267,30 +267,26 @@
                         }
                     }
                     dataObj.push(
-                            {value:food,name:'餐饮',itemStyle: {
+                            {value:food,name:'工资',itemStyle: {
                                 normal: {
                                     color: 'rgba(0,150,160,1)'
                                 }
                             }},
-                            {value:traffic,name:'交通',itemStyle: {
+                            {value:traffic,name:'奖金',itemStyle: {
                                 normal: {
                                     color: 'rgba(0,145,150,1)'}
                             }},
-                            {value:travel,name:'旅游',itemStyle: {
+                            {value:travel,name:'分红',itemStyle: {
                                 normal: {
                                     color: 'rgba(0,140,150,1)'}
                             }},
-                            {value:electric,name:'电器',itemStyle: {
+                            {value:electric,name:'股票',itemStyle: {
                                 normal: {
                                     color: 'rgba(0,150,160,1)'}
                             }},
-                            {value:life,name:'生活',itemStyle: {
+                            {value:life,name:'期权',itemStyle: {
                                 normal: {
                                     color: 'rgba(0,150,150,1)'}
-                            }},
-                            {value:furniture,name:'家具',itemStyle: {
-                                normal: {
-                                    color: 'rgba(0,150,160,1)'}
                             }}
                     );
                     myChart.setOption({
